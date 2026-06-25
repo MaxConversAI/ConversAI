@@ -1,0 +1,55 @@
+
+
+
+body {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50%;
+
+    height: 100vh;
+}
+
+#div1 {
+
+    background-color: burlywood;
+
+    grid-column: 1/ span 1;
+    grid-row: 1/ span 1;
+
+    vertical-align: middle;
+
+}
+
+#div2 {
+
+    background-color: rgb(135, 205, 222);
+
+    grid-column: 2/ span 1;
+    grid-row: 1/ span 1;
+
+
+}
+
+#div3 {
+
+    background-color: rgb(208, 135, 222);
+
+    grid-column: 1/ span 1;
+    grid-row: 2/ span 1;
+
+
+}
+
+#div4 {
+
+    background-color: rgb(222, 135, 135);
+
+    grid-column: 2/span 1;
+    grid-row: 2/ span 1;
+
+
+}
+
+h1 {
+    margin: 25%;
+}
