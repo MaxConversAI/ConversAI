@@ -1,0 +1,66 @@
+
+body {
+   /* margin: 0; */
+
+}
+
+.main {
+
+    border: solid 2px #000000;
+  
+
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto auto;
+}
+
+.header{
+    
+    border: solid 2px #000000;
+
+    grid-column: span 4 / span 4;
+
+    padding: 1cap;
+    
+
+}
+
+.leftBar {
+
+    border: solid 2px #000000;
+
+    grid-row: span 2 / span 2;
+    grid-row-start: 2;
+
+    padding: 1cap;
+}
+
+.body { 
+
+    border: solid 2px #000000;
+    border-top: none;
+
+    grid-column: span 3 / span 3;
+    grid-row: span 2 / span 2;
+    grid-row-start: 2;
+
+    padding: 1cap;
+
+    min-height: 500px;
+    overflow: scroll;
+}
+
+.rightBar {
+    
+}
+
+.footer {
+
+
+
+    grid-column: span 4 / span 4;
+    grid-row-start: 4;
+
+    padding: 1cap;
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style2.css">
+    </head>
+    <body>
+        <section class="main">
+            <div class="header"> <!-- HEADER PER LOGO -->
+                <h1>ConversAI logo</h1>
+            </div>
+
+            <div class="leftBar"> <!-- sezione che viene popolata dai progetti e conversazioni popolate da script e DB -->                
+                <table id="tab_progetti"> 
+                    <thead>
+                        <tr><button>Nuovo progetto</button></tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+                
+                <table id="tab_conversazioni">
+                    <thead>
+                        <tr><button>Nuova conversazione</button></tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="body"><!-- SEZIONE PRINCIPALE CHE CONTIENE UN IFRAME PER I MESSAGGI -->
+                <iframe id="chat_screen" src="chat_screen.html" title="chat screen"></iframe>
+            </div>  
+
+            <div class="user_input"><!-- SEZIONE INPUT UTENTE -->
+                <form id="form_userinput">
+                    <textarea name="user_chat_txtarea" id="user_chat_txtarea"></textarea><button name="send_user_chat_msg" id="send_user_chat_msg">Invia</button>
+                </form>
+            </div> 
+
+            <div class="footer"> <!-- FOOTER PER DATI AUTORE PAGINA, MAIL, ECC. -->
+                Footer
+            </div>   
+        </section>
+
+        <script src="script.js"></script>
+    </body>
+</html>

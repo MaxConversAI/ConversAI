@@ -1,0 +1,463 @@
+/* FONT */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght,XOPQ,XTRA,YOPQ,YTDE,YTFI,YTLC,YTUC@8..144,100..1000,96,468,79,-203,738,514,712&display=swap');
+
+.roboto-flex-std {
+    font-family: "Roboto Flex", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+    font-variation-settings:
+        "slnt" 0,
+        "wdth" 100,
+        "GRAD" 0,
+        "XOPQ" 96,
+        "XTRA" 468,
+        "YOPQ" 79,
+        "YTAS" 750,
+        "YTDE" -203,
+        "YTFI" 738,
+        "YTLC" 514,
+        "YTUC" 712;
+    }
+
+.roboto-flex-bold {
+  font-family: "Roboto Flex", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  font-variation-settings:
+    "slnt" 0,
+    "wdth" 100,
+    "GRAD" 250,
+    "XOPQ" 96,
+    "XTRA" 468,
+    "YOPQ" 79,
+    "YTAS" 750,
+    "YTDE" -203,
+    "YTFI" 738,
+    "YTLC" 514,
+    "YTUC" 712;
+}
+
+/*  VARIABILI   */
+:root {
+   
+    /* FONT */
+
+    
+            /*COLORI*/
+    --font-color: aqua;
+
+    --bg-gradient: linear-gradient(15deg,
+        rgba(171, 162, 221, 0.401) 10%,
+        rgba(57, 136, 93, 0.189) 100%);
+    
+    --bg-msg-utente: linear-gradient(15deg,
+        rgba(63, 36, 218, 0.363) 40%,
+        rgba(91, 158, 121, 0.512) 100%);
+
+    --bg-border:  linear-gradient(
+                    45deg,
+                    rgba(255, 255, 255, 0.438),
+                    rgba(255, 255, 255, 0.322) 15%,
+                    rgba(255, 255, 255, 0.03) 45%,
+                    rgba(155, 189, 228, 0.485) 90%
+        ); 
+
+    --inside-border:  linear-gradient(
+                    -45deg,
+                    rgba(255, 255, 255, 0.575),
+                    rgba(255, 255, 255, 0.322) 15%,
+                    rgba(255, 255, 255, 0.03) 45%,
+                    rgba(155, 189, 228, 0.685) 90%
+        );     
+   --inside-border-2:  linear-gradient(
+                    45deg,
+                    rgba(255, 255, 255, 0.575),
+                    rgba(255, 255, 255, 0.322) 15%,
+                    rgba(255, 255, 255, 0.03) 45%,
+                    rgba(155, 189, 228, 0.685) 90%
+        );     
+
+    --btn-color: linear-gradient(42deg, /*COLORI BUTTON*/
+                rgba(57, 212, 168, 0.708) 10%,
+                rgba(99, 149, 209, 0.7) 84%);
+    --btn-color2: linear-gradient(42deg, /*COLORI BUTTON*/
+                rgba(93, 226, 188, 0.666) 10%,
+                rgba(100, 163, 240, 0.892) 84%);
+
+    /*MISURE*/
+    --padding-title: 1em 0.5em 1em 1em;
+
+    --padding-05: 0.5em;
+    --padding-1: 1em;
+    --padding-2: 2em;
+    --bord-padd-1: 2px; /*  SPESSORE BORDO CON RADIUS   */
+
+    
+    --margin-title: 0px auto 0px auto;
+    --margin-1: 0.5em;
+    --margin-2: 1em;
+    --margin-ext: 1.5em ;
+
+    --border-rad-3: 3em;
+    --border-rad-2: 2em;
+    /*EFFETTI*/
+    --blur-1: blur(6px);
+
+    --bx-shadow-1:
+    inset 0px 0px 30px 5px rgba(173, 218, 218, 0.5),
+    0 30px 30px 2px rgba(36, 48, 54, 0.3);
+
+    --bx-shadow-3: 
+              
+        /*riflessi interni*/
+    inset     0px 10px 20px  1px rgba(0, 0, 0, 0.4),
+    inset     15px 20px 10px 4px rgba(191, 231, 231, 0.25),
+    inset    -15px 20px 10px 4px rgba(173, 218, 218, 0.25),
+
+    inset     10px 00px 10px  0px rgba(0, 0, 0, 0.2),
+    inset     -10px 00px 10px  0px rgba(0, 0, 0, 0.2),
+    
+
+    inset     0 000px 0px 0px rgba(0, 0, 0, 0.568),
+    inset     0 -10px 15px 5px rgba(241, 215, 215, 0.705),
+        /*ombra esterna*/
+              0 20px 10px 0px rgba(161, 209, 233, 0.205),
+              0 30px 30px 2px rgba(36, 48, 54, 0.3);
+
+    --bx-shadow-2: 0 10px 35px rgba(0,0,0,.18),
+        inset 0 1px 1px rgba(24, 116, 73, 0.45),
+        inset 0 -1px 1px rgba(255,255,255,.08),
+        0 0 15px rgba(180,230,255,.20);
+
+    --glow-external: 0 0px 20px rgba(238, 238, 238, 0.625);
+}
+
+
+/*****************************************************************/
+
+body {
+    margin: 0;
+    background: #14755a;
+    background: radial-gradient(circle,
+            rgb(30, 133, 103) 0%,
+            rgba(18, 67, 128, 1) 100%);
+
+    color: var(--font-color);
+    overflow-x: hidden;
+   
+}
+
+button {
+    background: var(--btn-color);
+    border: none;
+    border-radius: var(--border-rad-3);
+    padding: var(--padding-1);
+    box-shadow: var(--bx-shadow-2);
+    color: var(--font-color);
+    transition: all 0.3s;
+    
+}
+
+button:hover {
+    transform: translateY(-5px);
+}
+
+button:active {
+    transform: translateY(0px);
+    box-shadow: var(--glow-external);
+    transition: transform 0.05s;
+}
+
+.glow {
+    margin: var(--margin-1);
+    overflow: hidden;
+    position: relative;
+    --x: 50%;
+    --y: 50%
+}
+.glow::before{
+    content: "";
+    background: radial-gradient(
+        circle 150px at var(--x) var(--y),
+        rgba(239, 250, 255, 0.808) 0%,
+        transparent 60%);
+
+    position: absolute;
+    /*top: var(--y, -999px);
+    left: var(--y, -999px);*/
+    inset: 0;
+   
+
+    pointer-events: none;
+
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.glow:hover::before{
+    opacity: 1;
+   
+}
+
+
+.glow::after {
+    content: "";
+    position: absolute;
+    inset: 0px;
+    border-radius: inherit;
+    pointer-events: none;
+
+    padding: var(--bord-padd-1);
+    background: var(--bg-border);
+
+    /* Mostra solo il bordo */
+     mask:
+          linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+}
+/*
+button:hover {
+    background: var(--btn-color);
+    border: none;
+    border-radius: var(--border-rad-3);
+    padding: var(--padding-1);
+    box-shadow: var(--bx-shadow-2);
+    color: var(--font-color);
+
+}
+*/
+
+#top_banner {
+    max-width: 500px;
+   
+}
+
+
+.card {
+    overflow: hidden;
+    position: relative;
+    --x: 50%;
+    --y: 50%
+}
+
+.card::before {
+    content: "";
+    background: radial-gradient(
+        circle 1500px at var(--x) var(--y),
+        rgba(78, 235, 214, 0.45) 0%,
+        transparent 60%);
+
+    position: absolute;/*
+    top: var(--y, -999px);
+    left: var(--y, -999px);*/
+    inset: 0;
+  
+
+    pointer-events: none;
+
+    opacity: 0;
+    transition: opacity 1s ease;
+
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+
+.main {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(4, auto) repeat(8, 1fr);
+    padding: var(--padding-1) var(--padding-2) 0 var(--padding-2);
+    
+}
+
+.header{
+    grid-column: span 12 / span 12;
+    grid-row: span 2 / span 2;
+    /*background-color: rgb(255, 154, 154);*/
+    padding: var(--padding-1);
+    
+
+}
+
+
+
+.leftBar {
+
+    grid-column: span 3 / span 3;
+    grid-row: span 9 / span 9;
+    grid-row-start: 3;
+    position: relative;
+
+    padding: var(--padding-2);
+    margin: var(--margin-1);
+    
+    background: var(--bg-gradient);    
+    border-radius: var(--border-rad-3);    
+    backdrop-filter: var(--blur-1);
+    box-shadow: var(--bx-shadow-1);
+    
+    
+}
+
+.leftBar::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+
+    padding: var(--bord-padd-1);
+    background: var(--bg-border);
+
+    /* Mostra solo il bordo */
+     mask:
+          linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+}
+
+/*   AREA PRINCIPALE   */
+.body { /*CONTENITORE IFRAME*/
+    grid-column: span 9 / span 9;
+    grid-row: span 9 / span 9;
+    grid-column-start: 4;
+    grid-row-start: 3;
+
+    padding: var(--padding-2);
+    margin: var(--margin-1);
+    
+    background: var(--bg-gradient);    
+    border-radius: var(--border-rad-3);    
+    backdrop-filter: var(--blur-1);
+    box-shadow: var(--bx-shadow-1);;
+    
+    display: grid;
+    grid-template-rows: 90% 10%;
+
+    min-height: 70vh;
+
+}
+
+.body::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+
+    padding: var(--bord-padd-1);
+    background: var(--bg-border);
+
+    /* Mostra solo il bordo */
+    mask:
+          linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+} 
+
+
+
+#chat_screen { /* iframe */
+    width: 100%;
+    height: 100%;
+    border: hidden;
+}
+
+/*   AREA INPUT MESSAGGI UTENTE   */
+.user_input { 
+    grid-row-start: 2;
+  
+}
+
+#form_userinput {
+    display: flex;
+
+}
+
+#user_chat_txtarea {
+    display: flex;
+    flex-basis: 90%;
+    border: none;
+    border-radius: var(--border-rad-3) 0 0 var(--border-rad-3);/*10px 0px 0px 10px;*/
+    padding: 1em;
+    max-height: 80px;
+    box-shadow: var(--bx-shadow-2);   
+    z-index: 150;
+}
+
+#user_chat_txtarea:focus {
+    outline: none;
+}
+
+#send_user_chat_msg {
+    border-radius: 0px var(--border-rad-3) var(--border-rad-3) 0px;
+    border: 0px;
+    flex-basis: 10%;
+    margin: 0;        
+    /*
+    background: var(--btn-color)*/
+}
+
+#send_user_chat_msg:hover {
+    transform: translateY(0);
+}
+
+
+.footer {
+    font-size: small;
+    align-items: center;
+    grid-column: span 12 / span 12;
+    grid-row: span 1 / span 1;
+    grid-row-start: 12;
+    padding: 1em;
+    
+}
+
+#modal_conv, #modal_project {
+
+    min-width: 13vw;
+    max-width: 18vw;
+    min-height: 50vh;
+    max-height: 60vh;
+
+    position: absolute;
+    z-index: 99;
+    top: 50%;
+    left: 50%;
+
+    left: calc(50vw - 200px);
+    top: calc(50vh - 350px);
+
+    padding: var(--padding-2);
+    margin: var(--margin-1);
+    
+    background: var(--bg-gradient);    
+    border-radius: var(--border-rad-3);    
+    backdrop-filter: var(--blur-1);
+    box-shadow: var(--bx-shadow-1);
+
+}
+
+
+
+
+
+

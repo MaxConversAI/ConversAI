@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style2.css">
+    </head>
+    <body>
+        <section class="main">
+            <div class="header"> <!-- HEADER PER LOGO -->
+                <!--<h1>ConversAI logo</h1>-->
+                <img id="top_banner" src="img/banner.svg"></img>
+            </div>
+
+            <div class="leftBar"> <!-- sezione che viene popolata dai progetti e conversazioni popolate da script e DB -->                
+                <table id="tab_progetti"> 
+                    <thead>
+                        <tr><button id="new_project" class="arr_opener" data-target_id="modal_project">Nuovo progetto</button></tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+                
+                <table id="tab_conversazioni">
+                    <thead>
+                        <tr><button id="new_convers" class="arr_opener" data-target_id="modal_conv">Nuova conversazione</button></tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="body"><!-- SEZIONE PRINCIPALE CHE CONTIENE UN IFRAME PER I MESSAGGI -->
+                <iframe id="chat_screen" src="chat_screen.html" title="chat screen"></iframe>
+            </div>  
+
+            <div class="user_input"><!-- SEZIONE INPUT UTENTE -->
+                <form id="form_userinput">
+                    <textarea name="user_chat_txtarea" id="user_chat_txtarea"></textarea><button name="send_user_chat_msg" id="send_user_chat_msg">Invia</button>
+                </form>
+            </div> 
+
+            <div class="footer"> <!-- FOOTER PER DATI AUTORE PAGINA, MAIL, ECC. -->
+                Footer
+            </div>   
+        </section>
+
+            <!-- FINESTRE MODALI PER FORM NUOVO PROGETTO O CONVERSAZIONE -->
+        
+            <!-- NUOVA CONVERSAZIONE -->
+        <div id="modal_conv" class="modal_hidden">
+            <div class="title_modal">
+                Nuova conversazione
+            </div>
+            <div>
+                <form>
+                    <label for="conv_name">Inserisci il topic della nuova conversazione</label>
+                    <input type="text" id="conv_name">
+                </form>
+            </div>
+            <div>
+                <textarea id="conv_descr"></textarea>
+            </div>
+            <div>
+                <button id="ins_new_conv" class="arr_opener" data-target_id="modal_conv">Inizia nuova conversazione</button>
+                <button id="Annulla" class="arr_opener" data-target_id="modal_conv">Annulla</button>
+            </div>
+        </div>
+
+            <!-- NUOVO PROGETTO -->
+        <div id="modal_project" class="modal_hidden">
+            <div class="title_modal">
+                Nuovo progetto
+            </div>
+            <div>
+                <form>
+                    <label for="project_name">Inserisci il nome del progetto</label>
+                    <input type="text" id="project_name">
+                </form>
+            </div>
+            <div>
+                <textarea id="project_descr"></textarea>
+            </div>
+            <div>
+                <button id="ins_new_proj" class="arr_opener" data-target_id="modal_project">Conferma nuovo progetto</button>
+                <button id="Annulla" class="arr_opener" data-target_id="modal_project">Annulla</button>
+            </div>
+        </div>
+
+        <!--<script src="script.js"></script>-->
+        <script src="script/apriModali.js"></script>
+        <script src="script/main_script.js"></script>
+        <script src="script/UI.js"></script>
+    </body>
+</html>
+
