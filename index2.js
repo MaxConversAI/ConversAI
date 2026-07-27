@@ -135,7 +135,7 @@ const db = new sqlite3.Database('./CAI_DB.db');
 
 
     // INVIO MESSAGGIO CHAT
-    app.post(
+    /*app.post(
       '/api/sendMessage', (req, res) => {
         console.log("sendMessage chiamata");
         console.log(req.body);
@@ -161,18 +161,103 @@ const db = new sqlite3.Database('./CAI_DB.db');
                 message: "errore nell'inserimento della cross convXmess"
                 })
               }
+              db.run('SELECT msg_simulato FROM CAI_messaggi_simulati WHERE id = 1', [],
+              function(err) {
+                if (err) {
+                  return res.status(500).json({
+                  code: err.code,
+                  message: err.message
+                  });
+                }
               res.json({
-              successo: true,
-              id: messID,
-              testo: req.body.message,
-              ruolo: req.body.ruolo_id,
-              data_invio: dataInvio
-              });
+                successo: true,
+                id: messID,
+                testo: req.body.message,
+                ruolo: req.body.ruolo_id,
+                data_invio: dataInvio,
+                msg_risp: res.body.msg_simulato
+                });
+            });
           });
         });
     });
   
-  
+  */
+    app.post(
+      '/api/sendMessage', async (req, res) => {
+        try {
+              
+          const msgUtente = await InserisciMessaggio(req.body.ruolo_id, req.body.message);
+              
+          await crossMsgXConv(req.body.conv_id, msgUtente.id);
+              
+          const testoMsgAssistente = await getMsgSimulato();
+              
+          const msgAssistente = await InserisciMessaggio(2, testoMsgAssistente);
+              
+          await crossMsgXConv(req.body.conv_id, msgAssistente.id);
+              
+          res.json({
+                  successo: true,
+                  msgUtente: msgUtente,
+                  msgAssistente: msgAssistente     
+                  });  
+        } catch (err) {
+            res.status(500).json({
+            code: err.code,
+            message: err.message
+        });
+      }
+    });
+
+
+  //////////////// API PER UPDATE
+
+      // CANCELLA PROGETTI
+    app.post (
+      '/api/del_progetti', (req, res) => {
+        db.run(
+          'UPDATE CAI_Progetti SET ind_canc = 1 WHERE id = ?',
+          [req.body.id],
+          function(err) {
+
+            if (err) {
+              console.log(err.message);
+              return response.status(500).json({
+                code: err.code,
+                message: err.message
+              });
+            }
+              res.json({
+              successo: true
+            });
+        });
+      }
+    );
+
+      // CANCELLA CONVERSAZIONI
+        app.post (
+      '/api/del_conversazioni', (req, res) => {
+        db.run(
+          'UPDATE CAI_Conversazioni SET ind_canc = 1 WHERE id = ?',
+          [req.body.id],
+          function(err) {
+
+            if (err) {
+              console.log(err.message);
+              return response.status(500).json({
+                code: err.code,
+                message: err.message
+              });
+            }
+              res.json({
+              successo: true
+            });
+        });
+      }
+    );
+
+
 
   // API DI PROVA
   app.post(
@@ -218,9 +303,73 @@ const db = new sqlite3.Database('./CAI_DB.db');
     });
 
 
-        
+/////// PROMISES ////////
+
+function InserisciMessaggio(ruolo_id, testo) {
+    return new Promise((resolve, reject) => {
+
+        const dataInvio = Date.now(); 
+
+        db.run('INSERT INTO CAI_Messaggi(ruolo_id, testo, data_invio) VALUES (?, ?, ?)',
+          [ruolo_id, testo, dataInvio],
+          function(err) {
+            if (err) {
+              return reject(err);
+              }
+
+            resolve({
+                id: this.lastID,
+                ruolo_id: ruolo_id,
+                testo: testo,
+                data_invio: dataInvio
+            });
+
+        });
+    });
+}
+
+
+function crossMsgXConv (id_conv, id_msg) {
+    return new Promise((resolve, reject) => {
+        db.run('INSERT INTO CAI_convXmess(conv_id, mess_id) VALUES (?, ?)',
+            [id_conv, id_msg],
+            function(err) {
+                if (err) {
+                  return reject(err);
+                }
+                
+                resolve({
+
+                });
+            
+            }
+        );
+    });
+}
+
+
+function getRandomNumber() {
+  numCasuale = Math.floor(Math.random() * 40)+1;
+  console.log(numCasuale);
+  return numCasuale;
+}
+
+function getMsgSimulato() {
+    return new Promise ((resolve, reject) => {
+        db.get('SELECT msg_simulato FROM CAI_messaggi_simulati WHERE id = ?',
+            [getRandomNumber()],
+            function(err, row) {
+                if (err) {
+                  return reject(err);
+                }
+              resolve(row.msg_simulato);
+            }
+
+        );
+    });
+}
     
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`ConversAI avviato su port ${port}`);
 });
