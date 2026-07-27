@@ -130,11 +130,13 @@ function sendNewMessage(idRuolo) {
             
             const sezMessaggi = document.getElementById("sezione_chat");
             if (data.successo) {
-                creaBubbleMess(sezMessaggi, data);
+                creaBubbleMess(sezMessaggi, data.msgUtente);
+                sezMessaggi.scrollTop = sezMessaggi.scrollHeight;
+                creaBubbleMess(sezMessaggi, data.msgAssistente);
                 txtArea.value = "";
-                console.log(data);
                 console.log("mess inviato");
                 sezMessaggi.scrollTop = sezMessaggi.scrollHeight;
+                ;
             }
         });
     }
@@ -204,7 +206,14 @@ const getConversazioni = (x) => {
         sezConversazioni.innerHTML = ""; //svuoto la sezione prima di scriverci dentro
         data.forEach(convers => {
             // per ogni conversazione inserisco un div
+            const divContainer = document.createElement("div");
             const div = document.createElement("div");
+            const divDel = document.createElement("div");
+
+            divContainer.classList.add("tabContainer");
+            divDel.classList.add("nomeConversazione", "divDel");
+            
+
             div.textContent = convers.topic;
             div.dataset.idConversazione = convers.id;
             div.classList.add("nomeConversazione", "selectable");
@@ -217,9 +226,27 @@ const getConversazioni = (x) => {
                 resetConversazioniSelezionate();
                 selectedConversazione = convers.id;
                 div.classList.toggle("selected");
-            })      
+            })
 
-            sezConversazioni.appendChild(div);
+            divContainer.appendChild(div);
+            divDel.addEventListener("click", () => {
+                    fetch ('/api/del_conversazioni', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        id: convers.id
+                    })
+                })
+                .then (res => res.json());
+                getConversazioni(selectedProgetto);
+
+            });
+
+            divDel.innerHTML = "x";
+            divContainer.appendChild(divDel);
+                    
+            sezConversazioni.appendChild(divContainer);
+
 
         })
     })
@@ -238,16 +265,21 @@ const getProgetti = () => {
             sezProgetti.innerHTML = ""; // svuoto la sezione prima di scriverci dentro
             data.forEach(progetto => {
 
-                //per ogni progetto ottenuto inseriamo un div contentente il nome del progetto
+                //per ogni progetto ottenuto inseriamo un div contentente il nome del progetto e il tasto per la cancellazione
+                const divContainer = document.createElement("div");
                 const div = document.createElement("div");
+                const divDel = document.createElement("div");
+                
+                divContainer.classList.add("tabContainer");
+                divDel.classList.add("nomeProgetto", "divDel");
+
                 div.textContent = progetto.nome;
                 div.dataset.idProgetto = progetto.id; //inseriamo nel dataset l'id del progetto
                 div.classList.add("nomeProgetto", "selectable");    // creiamo una classe CSS
 
                 div.addEventListener("click", () => {
-                    //console.log("progetto "+ div.dataset.idProgetto);
-                    getConversazioni(progetto.id);   //se click sul nome progetto
-                    //console.log("qua funziona");              //memorizzo l'id per visualizzare le conversazioni
+                    
+                    getConversazioni(progetto.id);   //se click sul nome progetto memorizzo l'id per visualizzare le conversazioni
                     selectedProgetto = div.dataset.idProgetto;  //e per salvare le conversazioni associate al progetto tramite tabella cross
                     selectedConversazione = null;
                     console.log("id progetto selezionato " + selectedProgetto);
@@ -255,7 +287,25 @@ const getProgetti = () => {
                     div.classList.toggle("selected");
                  });
 
-                sezProgetti.appendChild(div);
+                divContainer.appendChild(div);
+                divDel.addEventListener("click", () => {
+                     fetch ('/api/del_progetti', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({
+                            id: progetto.id
+                        })
+                    })
+                    .then (res => res.json())
+                    .then (data => data.json());
+
+                    getProgetti();
+
+                });
+                divDel.innerHTML = "x";
+                divContainer.appendChild(divDel);
+
+                sezProgetti.appendChild(divContainer);
             });
 
         } else {
