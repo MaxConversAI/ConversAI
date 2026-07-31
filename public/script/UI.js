@@ -1,3 +1,10 @@
+// - assegnazione event listener ai button della pagina
+// - funzioni per effetto bagliore dinamico
+// - apertura e chiusura finestre modali
+// - trascinamento finestre modali
+// - generazione bubble dei messaggi
+
+
 //////////// ASSEGNAZIONI BUTTON
 
 document.getElementById("ins_new_conv").addEventListener("click", insertNewConversazione);
@@ -5,8 +12,16 @@ document.getElementById("ins_new_proj").addEventListener("click", insertNewProje
  //chiama la funzione per salvare un messaggio con ruolo 1 (utente)
 document.getElementById("send_user_chat_msg").addEventListener("click", () => {sendNewMessage(1)});
 
+///// variabile in millisecondi per il ritardo della risposta dell'assistente
+let ritardoRisposta = 800;
 
 
+
+// card.getBoundingClientRect() trova le coordinate dei bordi esterni dell'elemento
+// poi per ciascun elemento con classe "card" assegna un eventListener che ascolta
+// il movimento del mouse e ne cattura le coordinate
+// per trasformarle in proprietà CSS per stabilire il centro del gradiente per dare l'impressione
+// che l'effetto di luce segua il cursore
 document.querySelectorAll(".card").forEach(card => {
     card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();        
@@ -32,6 +47,9 @@ let dragging;
 let offsetX = 0;
 let offsetY = 0;
 
+
+// per ogni elemento con classe "draggable" aggiunge un listener che ascolta quando il tasto
+// del mouse viene tenuto schiacciato e inserisce le coordinate del cursore dentro a delle variabili
 
 document.querySelectorAll(".draggable").forEach(drag => {
     drag.addEventListener("mousedown", (e) => {
@@ -84,6 +102,8 @@ for (const button of buttons) {
     });
 }
 
+
+// toglie la classe ai progetti selezionati, viene chiamata al momento del click
 function resetProgettiSelezionati() {
     let itemSelezionati = document.getElementsByClassName("selected");
 
@@ -95,6 +115,8 @@ function resetProgettiSelezionati() {
     }
 }
 
+
+// toglie la classe alle conversazioni selezionate, viene chiamata al momento del click
 function resetConversazioniSelezionate() {
     let itemSelezionati = document.getElementsByClassName("selected");
 
@@ -108,10 +130,8 @@ function resetConversazioniSelezionate() {
 
 
 
-// seleziona il progetto e popola le conversazioni
 
-
-// crea il bubble del messaggio
+// crea il bubble del messaggio quando richiedo i messaggi dal DB
 function creaBubbleMess(sezMsg, mess) {
     const divContainer = document.createElement("div");
     const divMsg = document.createElement("div");
@@ -123,13 +143,60 @@ function creaBubbleMess(sezMsg, mess) {
     divMsgOrario.classList.add("msg-orario");
 
     divContainer.dataset.idMessaggio = mess.id;
-    divContainer.dataset.ruolo = mess.ruolo;
-    if (mess.ruolo = 1) {
+    divContainer.dataset.ruolo = mess.ruolo_id;
+
+    ///////////////
+    if (mess.ruolo_id == 1) {
         divContainer.classList.add("msg-utente");
         divMsg.classList.add("msg-utente-testo");
+    } else {
+        divContainer.classList.add("msg-assistente");
+        divMsg.classList.add("msg-assistente-testo");
     }
+///////////////////////////////////////////
     divContainer.appendChild(divMsg);
     divContainer.appendChild(divMsgOrario);
     sezMsg.appendChild(divContainer);
 }
 
+
+// crea il bubble del messaggio al momento dell'invio
+// con ritardo per simulare il tempo di calcolo dell'assistente IA
+function creaBubbleMessInst(sezMsg, mess) {
+    const divContainer = document.createElement("div");
+    const divMsg = document.createElement("div");
+    const divMsgOrario = document.createElement("div");
+
+    divMsg.textContent = mess.testo;
+    let dataInvio = new Date(mess.data_invio); //informo il sistema che si tratta di una data
+    divMsgOrario.textContent = dataInvio.toLocaleDateString()+" "+ dataInvio.toLocaleTimeString(); // lo converto in data locale
+    divMsgOrario.classList.add("msg-orario");
+
+    divContainer.dataset.idMessaggio = mess.id;
+    divContainer.dataset.ruolo = mess.ruolo_id;
+
+    ////////////////
+    if (mess.ruolo_id == 1) {
+        divContainer.classList.add("msg-utente");
+        divMsg.classList.add("msg-utente-testo");
+        
+        divContainer.appendChild(divMsg);
+        divContainer.appendChild(divMsgOrario);
+        sezMsg.appendChild(divContainer);
+
+        sezMsg.scrollTop = sezMsg.scrollHeight;
+        //////////
+    } else {
+         divContainer.classList.add("msg-assistente");
+        divMsg.classList.add("msg-assistente-testo");
+
+        setTimeout( () => {
+            divContainer.appendChild(divMsg);
+            divContainer.appendChild(divMsgOrario);
+            sezMsg.appendChild(divContainer);
+            sezMsg.scrollTop = sezMsg.scrollHeight;
+            }, ritardoRisposta
+        );
+    }
+
+}
