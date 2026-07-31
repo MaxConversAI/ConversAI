@@ -2,15 +2,11 @@
 // - funzione di debug
 // - dichiarazione degli elementi
 // - variabili che memorizzano le conversazioni e progetti selezionati dall'utente
-// - funzioni dei button della pagina index.html
-// - assegnazione event listener ai button della pagina
-
-//const { response } = require("express");
+// - fetch per richiamare e inserire conversazioni, progetti e messaggi
 
 
-//DA FARE
-//cross conv x prog
-//cross messaggio x conv
+
+
 
 //////////// DEBUG
 banner = document.getElementById("top_banner").addEventListener("click", debaco); //ALENKA DOCET
@@ -130,12 +126,12 @@ function sendNewMessage(idRuolo) {
             
             const sezMessaggi = document.getElementById("sezione_chat");
             if (data.successo) {
-                creaBubbleMess(sezMessaggi, data.msgUtente);
-                sezMessaggi.scrollTop = sezMessaggi.scrollHeight;
-                creaBubbleMess(sezMessaggi, data.msgAssistente);
+                creaBubbleMessInst(sezMessaggi, data.msgUtente); // richiama la funzione presente in UI.js
+                
+                creaBubbleMessInst(sezMessaggi, data.msgAssistente); // richiama la funzione presente in UI.js
                 txtArea.value = "";
                 console.log("mess inviato");
-                sezMessaggi.scrollTop = sezMessaggi.scrollHeight;
+                
                 ;
             }
         });
@@ -163,7 +159,7 @@ function getMessaggi(conv_id) {
             sezMessaggi.innerHTML = "";
 
             data.forEach(mess => {
-                creaBubbleMess(sezMessaggi, mess);
+                creaBubbleMess(sezMessaggi, mess); // richiama la funzione presente in UI.js
             })
 
              sezMessaggi.scrollTop = sezMessaggi.scrollHeight;
