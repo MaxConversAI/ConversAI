@@ -16,6 +16,18 @@ document.getElementById("send_user_chat_msg").addEventListener("click", () => {s
 let ritardoRisposta = 800;
 
 
+// se si preme invio mentre la sezione input dell'utente è attiva si invia il messaggio
+const chat_txtarea = document.getElementById("user_chat_txtarea");
+chat_txtarea.addEventListener("keydown", (tasto) => {
+   
+     if (tasto.code == "Enter") {
+       sendNewMessage(1);
+       chat_txtarea.value = "";
+    }
+
+});
+
+
 
 // card.getBoundingClientRect() trova le coordinate dei bordi esterni dell'elemento
 // poi per ciascun elemento con classe "card" assegna un eventListener che ascolta
@@ -30,6 +42,7 @@ document.querySelectorAll(".card").forEach(card => {
         card.style.setProperty("--x", `${e.clientX - rect.left}px`);
     })
 });
+
 
 document.querySelectorAll(".glow").forEach(glow => {
     glow.addEventListener('mousemove', (e) => {
